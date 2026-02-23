@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Michael Shapira – Faith Over Finals</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0D1B2A;
+    --gold: #C9A84C;
+    --gold-light: #E8C87A;
+    --cream: #F5EFE0;
+    --blue-deep: #1A3A5C;
+    --text: #1a1a1a;
+  }
+
+  body {
+    background: #0a0a0a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px 20px;
+    font-family: 'DM Sans', sans-serif;
+    gap: 32px;
+  }
+
+  h1.page-title {
+    color: #555;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  /* ── CARD ── */
+  .card {
+    width: 100%;
+    max-width: 540px;
+    background: var(--navy);
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.8);
+  }
+
+  /* Grain overlay */
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* Top accent line */
+  .accent-line {
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), var(--gold), transparent);
+  }
+
+  /* Header block */
+  .header {
+    padding: 36px 40px 28px;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    position: relative;
+  }
+
+  .event-tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    border: 1px solid rgba(201,168,76,0.4);
+    padding: 4px 10px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  .headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 900;
+    line-height: 1.05;
+    color: var(--cream);
+    letter-spacing: -0.5px;
+  }
+
+  .headline em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .subhead {
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(245,239,224,0.55);
+    letter-spacing: 0.3px;
+    line-height: 1.5;
+  }
+
+  /* Award block */
+  .award-block {
+    margin: 0 40px;
+    margin-top: 28px;
+    background: linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.04));
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 3px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .award-icon {
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+
+  .award-text {
+    flex: 1;
+  }
+
+  .award-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2.5px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .award-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--cream);
+    line-height: 1.3;
+  }
+
+  .award-event {
+    font-size: 11px;
+    color: rgba(245,239,224,0.5);
+    margin-top: 2px;
+  }
+
+  /* Story block */
+  .story {
+    padding: 28px 40px;
+    position: relative;
+  }
+
+  .pull-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold-light);
+    line-height: 1.55;
+    padding-left: 18px;
+    border-left: 2px solid var(--gold);
+    margin-bottom: 22px;
+  }
+
+  .story-body {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(245,239,224,0.7);
+    line-height: 1.75;
+  }
+
+  /* Stats row */
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 0 40px 28px;
+    border: 1px solid rgba(201,168,76,0.15);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .stat {
+    padding: 16px 14px;
+    text-align: center;
+    border-right: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    color: rgba(245,239,224,0.4);
+    text-transform: uppercase;
+    margin-top: 5px;
+    line-height: 1.4;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 20px 40px 28px;
+    border-top: 1px solid rgba(201,168,76,0.15);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .person {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--blue-deep), var(--navy));
+    border: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--gold-light);
+  }
+
+  .person-info .name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--cream);
+  }
+
+  .person-info .detail {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: rgba(245,239,224,0.4);
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+
+  .tags {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+  }
+
+  .hashtag {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    color: rgba(201,168,76,0.6);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── CAPTION SECTION ── */
+  .caption-section {
+    width: 100%;
+    max-width: 540px;
+  }
+
+  .caption-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: #444;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .caption-box {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 4px;
+    padding: 24px;
+    position: relative;
+  }
+
+  .caption-box p {
+    font-size: 13.5px;
+    line-height: 1.8;
+    color: #ccc;
+    white-space: pre-wrap;
+  }
+
+  .copy-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 3px;
+    color: #888;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .copy-btn:hover { background: #2a2a2a; color: #ccc; }
+  .copy-btn.copied { color: var(--gold); border-color: var(--gold); }
+
+  .divider {
+    width: 100%;
+    max-width: 540px;
+    height: 1px;
+    background: #1a1a1a;
+  }
+</style>
+</head>
+<body>
+
+<h1 class="page-title">📱 Shareable Social Post — Michael Shapira</h1>
+
+<!-- ── VISUAL CARD ── -->
+<div class="card">
+  <div class="accent-line"></div>
+
+  <div class="header">
+    <div class="event-tag">CTeen International Shabbaton 5786 · Nassau Coliseum</div>
+    <div class="headline">He made the<br><em>State Finals.</em><br>Then walked away.</div>
+    <div class="subhead">Satellite Beach, FL · FHSAA State Championships · 16 years old</div>
+  </div>
+
+  <div class="award-block">
+    <div class="award-icon">🏆</div>
+    <div class="award-text">
+      <div class="award-label">Highest Honor Awarded</div>
+      <div class="award-name">AZ Bahamar Award</div>
+      <div class="award-event">CTeen International Shabbaton 5786 — Nassau Coliseum</div>
+    </div>
+  </div>
+
+  <div class="story" style="padding-top: 28px;">
+    <div class="pull-quote">"Champions aren't only made in competition — sometimes they're made in the decision to walk away from one."</div>
+    <div class="story-body">Michael Shapira is a D1 swim prospect and one of Florida's top competitive swimmers. This season, he qualified for the FHSAA State Championship finals — the result of 5 years of training. Then he left. Finals started 18 minutes after Shabbat. For Michael, that wasn't a conflict. That was clarity. Weeks later, at Nassau Coliseum, 4,000+ Jewish teens watched him receive the AZ Bahamar Award — the highest honor at the CTeen International Shabbaton. His community chose him right back.</div>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num">5</div>
+      <div class="stat-label">Years of<br>Training</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">18</div>
+      <div class="stat-label">Minutes to<br>Shabbat</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">4K+</div>
+      <div class="stat-label">Teens at<br>Nassau</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="person">
+      <div class="avatar">MS</div>
+      <div class="person-info">
+        <div class="name">Michael Shapira</div>
+        <div class="detail">Satellite Beach HS · Class of 2027</div>
+      </div>
+    </div>
+    <div class="tags">
+      <div class="hashtag">#CTeen #FaithOverFinals</div>
+      <div class="hashtag">#AZBahamar #JewishPride</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── INSTAGRAM CAPTION ── -->
+<div class="caption-section">
+  <div class="caption-label">📋 Instagram / Facebook Caption — Copy & Post</div>
+  <div class="caption-box">
+    <button class="copy-btn" onclick="copyCaption(this)">COPY</button>
+    <p id="caption-text">He trained for 5 years for this moment.
+
+He made the FHSAA State Championship finals.
+
+Then he walked away — 18 minutes before Shabbat.
+
+Not because he had to. Because he chose to.
+
+Last weekend at Nassau Coliseum, surrounded by 4,000+ Jewish teens from around the world at the CTeen International Shabbaton 5786, Michael Shapira was presented the AZ Bahamar Award — the highest honor at the event — for that exact decision.
+
+Champions are built in the moments no one sees. But the Jewish community saw this one.
+
+So proud of you, Michael. 🏊‍♂️✡️🏆
+
+#CTeen #FaithOverFinals #AZBahamar #JewishPride #ShabbatShalom #D1Bound #SatelliteBeach</p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ── SHORT FORM / TWITTER / THREADS ── -->
+<div class="caption-section">
+  <div class="caption-label">📋 Short Form — Twitter / Threads / WhatsApp Status</div>
+  <div class="caption-box">
+    <button class="copy-btn" onclick="copyCaption2(this)">COPY</button>
+    <p id="caption2-text">5 years of training. State Finals. Left 18 min before Shabbat.
+
+This week at @CTeen's International Shabbaton at Nassau Coliseum — Michael Shapira received the AZ Bahamar Award.
+
+His community chose him right back. 🏆✡️
+
+#FaithOverFinals #CTeen5786</p>
+  </div>
+</div>
+
+<script>
+function copyCaption(btn) {
+  navigator.clipboard.writeText(document.getElementById('caption-text').innerText);
+  btn.textContent = 'COPIED ✓';
+  btn.classList.add('copied');
+  setTimeout(() => { btn.textContent = 'COPY'; btn.classList.remove('copied'); }, 2500);
+}
+function copyCaption2(btn) {
+  navigator.clipboard.writeText(document.getElementById('caption2-text').innerText);
+  btn.textContent = 'COPIED ✓';
+  btn.classList.add('copied');
+  setTimeout(() => { btn.textContent = 'COPY'; btn.classList.remove('copied'); }, 2500);
+}
+</script>
+</body>
+</html>
